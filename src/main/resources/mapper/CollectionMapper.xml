@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jg.mapper.CollectionMapper">
+  <resultMap id="BaseResultMap" type="com.jg.pojo.BlogCollection">
+    <!--@mbg.generated-->
+    <!--@Table bl_collection-->
+    <id column="collection_id" jdbcType="INTEGER" property="collectionId" />
+    <result column="blog_id" jdbcType="VARCHAR" property="blogId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="collection_time" jdbcType="TIMESTAMP" property="collectionTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    collection_id, blog_id, user_id, collection_time
+  </sql>
+</mapper>

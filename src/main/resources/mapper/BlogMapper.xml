@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jg.mapper.BlogMapper">
+  <resultMap id="BaseResultMap" type="com.jg.pojo.Blog">
+    <!--@mbg.generated-->
+    <!--@Table bl_blog-->
+    <id column="blog_id" jdbcType="VARCHAR" property="blogId" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle" />
+    <result column="blog_image" jdbcType="VARCHAR" property="blogImage" />
+    <result column="blog_content" jdbcType="LONGVARCHAR" property="blogContent" />
+    <result column="blog_goods" jdbcType="INTEGER" property="blogGoods" />
+    <result column="blog_read" jdbcType="INTEGER" property="blogRead" />
+    <result column="blog_collection" jdbcType="INTEGER" property="blogCollection" />
+    <result column="blog_type" jdbcType="INTEGER" property="blogType" />
+    <result column="blog_remark" jdbcType="VARCHAR" property="blogRemark" />
+    <result column="blog_comment" jdbcType="INTEGER" property="blogComment" />
+    <result column="blog_source" jdbcType="VARCHAR" property="blogSource" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    blog_id, blog_title, blog_image, blog_content, blog_goods, blog_read, blog_collection, 
+    blog_type, blog_remark, blog_comment, blog_source, created_time, update_time, version, 
+    deleted
+  </sql>
+    <insert id="insert" parameterType="com.jg.pojo.Blog">
+      insert into bl_blog(
+      blog_title,blog_content,blog_type, blog_remark, blog_source
+      )
+      values (
+      #{blogTitle},#{blogContent},#{blogType},#{blogRemark},#{blogSource}
+      )
+    </insert>
+  <select id="getById" resultMap="BaseResultMap">
+    select
+    blog_id, blog_title, blog_image, blog_content, blog_goods,
+    blog_read, blog_collection,
+    blog_type, blog_remark, blog_comment,
+    blog_source, created_time,  version
+    from bl_blog
+    where
+    blog_id=#{blogId}
+    and deleted=0
+  </select>
+  <update id="update" parameterType="com.jg.pojo.Blog">
+    update bl_blog set
+    version = version + 1
+    <if test="blogTitle!=null and blogTitle!=''">
+      ,blog_title = #{blogTitle}
+    </if>
+    <if test="blogImage!=null and blogImage!=''">
+      ,blog_image = #{blogImage}
+    </if>
+    <if test="blogContent!=null and blogContent!=''">
+      ,blog_content = #{blogContent}
+    </if>
+    <if test="blogGoods!=null">
+      ,blog_goods = #{blogGoods}
+    </if>
+    <if test="blogRead!=null">
+      ,blog_read = #{blogRead}
+    </if>
+    <if test="blogCollection!=null">
+      ,blog_collection = #{blogCollection}
+    </if>
+    <if test="blogType!=null">
+      ,blog_type = #{blogType}
+    </if>
+    <if test="blogRemark!=null and blogRemark!=''">
+      ,blog_remark = #{blogRemark}
+    </if>
+    <if test="blogComment!=null">
+      ,blog_comment = #{blogComment}
+    </if>
+    <if test="blogSource!=null and blogSource!=''">
+      ,blog_source = #{blogSource}
+    </if>
+    where blog_id = #{blogId}
+    and version = #{version}
+  </update>
+  <delete id="deleteById">
+     update bl_blog set
+     deleted=1
+    where blog_id = #{blogId}
+  </delete>
+</mapper>
